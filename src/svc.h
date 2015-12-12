@@ -8,9 +8,18 @@
 #ifndef SVC_H_
 #define SVC_H_
 
-#define SERVICE_NAME  _T("My Sample Service")
+#define SERVICE_NAME  _T("MySampleService")
+#define DISPLAY_NAME  _T("My Sample Service")
+#define SERVICE_AUTOSTART
 //#define USE_THREAD
-#define LOG_FILE "c:\\winservice.log"
+//#define LOG_FILE "c:\\winservice.log"
+
+
+#ifdef SERVICE_AUTOSTART
+#define SERVICE_START_MODE SERVICE_AUTO_START
+#else
+#define SERVICE_START_MODE SERVICE_DEMAND_START
+#endif
 
 #ifdef  __cplusplus
 extern "C" {
@@ -27,6 +36,7 @@ int ServiceInstall(TCHAR *path);
 int ServiceUninstall();
 int ServiceStart();
 int ServiceStop();
+void ServiceHelp();
 
 #ifdef USE_THREAD
 DWORD WINAPI ServiceWorkerThread(LPVOID lpParam);

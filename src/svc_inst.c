@@ -28,10 +28,10 @@ int ServiceInstall(TCHAR *path)
   SC_HANDLE hService = CreateService(
      hSCManager,
 		 SERVICE_NAME,
-		 SERVICE_NAME,
+		 DISPLAY_NAME,
      SERVICE_ALL_ACCESS,
      SERVICE_WIN32_OWN_PROCESS,
-     SERVICE_DEMAND_START,
+     SERVICE_START_MODE,
      SERVICE_ERROR_NORMAL,
 		 path,
      NULL, NULL, NULL, NULL, NULL

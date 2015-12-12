@@ -7,6 +7,7 @@ C_SRCS += \
 ../src/main.c \
 ../src/svc_ctrl.c \
 ../src/svc_glob.c \
+../src/svc_help.c \
 ../src/svc_inst.c \
 ../src/svc_main.c \
 ../src/svc_start.c \
@@ -18,6 +19,7 @@ OBJS += \
 ./src/main.o \
 ./src/svc_ctrl.o \
 ./src/svc_glob.o \
+./src/svc_help.o \
 ./src/svc_inst.o \
 ./src/svc_main.o \
 ./src/svc_start.o \
@@ -29,6 +31,7 @@ C_DEPS += \
 ./src/main.d \
 ./src/svc_ctrl.d \
 ./src/svc_glob.d \
+./src/svc_help.d \
 ./src/svc_inst.d \
 ./src/svc_main.d \
 ./src/svc_start.d \

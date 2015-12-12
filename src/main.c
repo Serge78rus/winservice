@@ -31,6 +31,7 @@ int _tmain(int argc, TCHAR *argv[])
 		LOG("StartServiceCtrlDispatcher()\n")
 		if (StartServiceCtrlDispatcher(sTable) == FALSE) {
 			LOG("Error: StartServiceCtrlDispatcher()\n")
+			ServiceHelp();
 			return GetLastError();
 		}
 	} else if (!strcmp(argv[1], _T("--install")) || !strcmp(argv[1], _T("-i"))) {
@@ -41,6 +42,10 @@ int _tmain(int argc, TCHAR *argv[])
 		return ServiceStart();
 	} else if (!strcmp(argv[1], _T("--stop"))) {
 		return ServiceStop();
+	} else if (!strcmp(argv[1], _T("--help")) || !strcmp(argv[1], _T("-h"))) {
+		ServiceHelp();
+	} else {
+		ServiceHelp();
 	}
 	LOG("~main()\n")
 	CLOSE_LOG()
