@@ -15,12 +15,12 @@
 
 int ServiceInstall(TCHAR *path)
 {
-	LOG("ServiceInstall()\n")
+	TRACE("ServiceInstall()\n")
 	printf("Installing service \"%s\" ...\n", SERVICE_NAME);
 
 	SC_HANDLE hSCManager = OpenSCManager(NULL, NULL, SC_MANAGER_CREATE_SERVICE);
   if(!hSCManager) {
-		LOG("Error: OpenSCManager()\n")
+		TRACE("Error: OpenSCManager()\n")
  		fprintf(stderr, "Error: Can't open Service Control Manager");
     return -1;
   }
@@ -38,7 +38,7 @@ int ServiceInstall(TCHAR *path)
   );
 
   if(!hService) {
-		LOG("Error: CreateService()\n")
+		TRACE("Error: CreateService()\n")
    int err = GetLastError();
     switch(err) {
       case ERROR_ACCESS_DENIED:
@@ -76,7 +76,7 @@ int ServiceInstall(TCHAR *path)
 
 	printf("Service \"%s\" installed OK\n", SERVICE_NAME);
 
-	LOG("~ServiceInstall()\n")
+	TRACE("~ServiceInstall()\n")
 	return 0;
 }
 

@@ -15,12 +15,12 @@
 
 VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
 {
-	LOG("ServiceMain()\n")
+	TRACE("ServiceMain()\n")
 
 	// Register our service control handler with the SCM
 	g_StatusHandle = RegisterServiceCtrlHandler(SERVICE_NAME, ServiceCtrlHandler);
 	if (!g_StatusHandle) {
-		LOG("Error: RegisterServiceCtrlHandler()\n");
+		TRACE("Error: RegisterServiceCtrlHandler()\n");
 		return;
 	}
 
@@ -35,7 +35,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
   g_ServiceStatus.dwWaitHint = 0; //
 
   if (SetServiceStatus(g_StatusHandle, &g_ServiceStatus) == FALSE) {
-  	LOG("Error: SetServiceStatus()\n")
+  	TRACE("Error: SetServiceStatus()\n")
   	return;
 	}
 
@@ -46,7 +46,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
 	// Create a service stop event to wait on later
 	g_ServiceStopEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 	if (g_ServiceStopEvent == NULL) {
-		LOG("Error: CreateEvent()\n")
+		TRACE("Error: CreateEvent()\n")
 		// Error creating event
 		// Tell service controller we are stopped and exit
 		g_ServiceStatus.dwControlsAccepted = 0;
@@ -55,7 +55,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
 		g_ServiceStatus.dwCheckPoint = 1;
 
 		if (SetServiceStatus(g_StatusHandle, &g_ServiceStatus) == FALSE) {
-	  	LOG("Error: SetServiceStatus()\n")
+	  	TRACE("Error: SetServiceStatus()\n")
 		}
 		return;
 	}
@@ -67,7 +67,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
 	g_ServiceStatus.dwCheckPoint = 0;
 
 	if (SetServiceStatus(g_StatusHandle, &g_ServiceStatus) == FALSE) {
-  	LOG("Error: SetServiceStatus()\n")
+  	TRACE("Error: SetServiceStatus()\n")
   	return;
 	}
 
@@ -75,7 +75,7 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
 	// Start a thread that will perform the main task of the service
 	HANDLE hThread = CreateThread(NULL, 0, ServiceWorkerThread, NULL, 0, NULL);
 	if (hThread == INVALID_HANDLE_VALUE) {
-  	LOG("Error: CreateThread()\n")
+  	TRACE("Error: CreateThread()\n")
   	return;
 	}
 	// Wait until our worker thread exits signaling that the service needs to stop
@@ -97,9 +97,9 @@ VOID WINAPI ServiceMain(DWORD argc, LPTSTR *argv)
 	g_ServiceStatus.dwCheckPoint = 3;
 
 	if (SetServiceStatus(g_StatusHandle, &g_ServiceStatus) == FALSE) {
-  	LOG("Error: SetServiceStatus()\n")
+  	TRACE("Error: SetServiceStatus()\n")
 	}
 
-	LOG("~ServiceMain()\n")
+	TRACE("~ServiceMain()\n")
 }
 

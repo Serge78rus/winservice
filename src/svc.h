@@ -12,7 +12,7 @@
 #define DISPLAY_NAME  _T("My Sample Service")
 #define SERVICE_AUTOSTART
 //#define USE_THREAD
-//#define LOG_FILE "c:\\winservice.log"
+//#define TRACE_FILE "c:\\winservice.log"
 
 
 #ifdef SERVICE_AUTOSTART
@@ -42,15 +42,15 @@ void ServiceHelp();
 DWORD WINAPI ServiceWorkerThread(LPVOID lpParam);
 #endif
 
-#ifdef LOG_FILE
+#ifdef TRACE_FILE
 FILE *g_LogFile;
-#define OPEN_LOG() g_LogFile = fopen(LOG_FILE, "a");
-#define CLOSE_LOG() fclose(g_LogFile);
-#define LOG(msg) {fprintf(g_LogFile, msg); fflush(g_LogFile);}
+#define OPEN_TRACE() g_LogFile = fopen(TRACE_FILE, "a");
+#define CLOSE_TRACE() fclose(g_LogFile);
+#define TRACE(msg) {fprintf(g_LogFile, msg); fflush(g_LogFile);}
 #else
-#define OPEN_LOG()
-#define CLOSE_LOG()
-#define LOG(msg)
+#define OPEN_TRACE()
+#define CLOSE_TRACE()
+#define TRACE(msg)
 #endif
 
 #ifdef  __cplusplus

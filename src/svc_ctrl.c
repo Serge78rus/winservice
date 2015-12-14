@@ -15,7 +15,7 @@
 
 VOID WINAPI ServiceCtrlHandler(DWORD CtrlCode)
 {
-	LOG("ServiceCtrlHandler()\n")
+	TRACE("ServiceCtrlHandler()\n")
 	switch (CtrlCode) {
 		case SERVICE_CONTROL_STOP:
 		case SERVICE_CONTROL_SHUTDOWN:
@@ -32,7 +32,7 @@ VOID WINAPI ServiceCtrlHandler(DWORD CtrlCode)
 			g_ServiceStatus.dwCheckPoint = 4;
 
 			if (SetServiceStatus(g_StatusHandle, &g_ServiceStatus) == FALSE) {
-				LOG("Error: SetServiceStatus()\n")
+				TRACE("Error: SetServiceStatus()\n")
 			}
 
 			// This will signal the main thread or worker thread to start shutting down
@@ -43,5 +43,5 @@ VOID WINAPI ServiceCtrlHandler(DWORD CtrlCode)
 		default:
 			break;
 	}
-	LOG("~ServiceCtrlHandler()\n")
+	TRACE("~ServiceCtrlHandler()\n")
 }

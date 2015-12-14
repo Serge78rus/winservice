@@ -17,6 +17,6 @@ SERVICE_STATUS g_ServiceStatus = {0};
 SERVICE_STATUS_HANDLE g_StatusHandle = NULL;
 HANDLE g_ServiceStopEvent = INVALID_HANDLE_VALUE;
 
-#ifdef LOG_FILE
+#ifdef TRACE_FILE
 FILE *g_LogFile;
 #endif

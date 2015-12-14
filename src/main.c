@@ -20,17 +20,17 @@
 
 int _tmain(int argc, TCHAR *argv[])
 {
-	OPEN_LOG()
-	LOG("\n-------------------------\n")
-	LOG("main()\n")
+	OPEN_TRACE()
+	TRACE("\n-------------------------\n")
+	TRACE("main()\n")
 	if (argc == 1) {
 		SERVICE_TABLE_ENTRY sTable[2];
 		ZeroMemory (sTable, sizeof(sTable));
 		sTable[0].lpServiceName = SERVICE_NAME;
 		sTable[0].lpServiceProc = (LPSERVICE_MAIN_FUNCTION)ServiceMain;
-		LOG("StartServiceCtrlDispatcher()\n")
+		TRACE("StartServiceCtrlDispatcher()\n")
 		if (StartServiceCtrlDispatcher(sTable) == FALSE) {
-			LOG("Error: StartServiceCtrlDispatcher()\n")
+			TRACE("Error: StartServiceCtrlDispatcher()\n")
 			ServiceHelp();
 			return GetLastError();
 		}
@@ -47,8 +47,8 @@ int _tmain(int argc, TCHAR *argv[])
 	} else {
 		ServiceHelp();
 	}
-	LOG("~main()\n")
-	CLOSE_LOG()
+	TRACE("~main()\n")
+	CLOSE_TRACE()
 	return 0;
 }
 
